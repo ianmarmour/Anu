@@ -6,7 +6,12 @@
     "anu": "./bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava -verbose"
+  },
+  "ava": {
+    "files": [
+      "tst/**/*"
+    ]
   },
   "author": "",
   "type": "module",
@@ -16,6 +21,7 @@
     "nodejs": "0.0.0"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "ava": "^3.5.0",
+    "mock-fs": "^4.11.0"
   }
 }

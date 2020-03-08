@@ -1,14 +1,25 @@
 function iterate(obj, propertyType, propertySet) {
-  for (var property in obj) {
-    if (obj.hasOwnProperty(property)) {
-      if (typeof obj[property] == "object") {
-        iterate(obj[property]);
-      } else {
-        if (propertyType == "key") {
-          propertySet.add(property);
-        }
-        if (propertyType == "value") {
-          propertySet.add(obj[property]);
+  const propertyProcessor = (obj, propertyType, propertySet) => {};
+  if (Array.isArray(obj)) {
+    for (let property of obj) {
+    }
+  } else {
+    for (let property in obj) {
+      if (obj.hasOwnProperty(property)) {
+        if (typeof obj[property] == "object") {
+          if (
+            propertyType === "key" &&
+            Array.isArray(obj[property]) === false
+          ) {
+            propertySet.add(property);
+          }
+          iterate(obj[property], propertyType, propertySet);
+        } else {
+          if (propertyType === "key") {
+            propertySet.add(property);
+          } else {
+            propertySet.add(obj[property]);
+          }
         }
       }
     }

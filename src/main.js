@@ -32,7 +32,7 @@ function generateValueSet(file) {
   let originalFileJSON = JSON.parse(rawdata);
   let originalFilePropertySet = new Set();
 
-  iterate(originalFileJSON, "value", originalFilePropertySet);
+  iterate(originalFileJSON, "value", originalFilePropertySet, false);
 
   return originalFilePropertySet;
 }
@@ -42,12 +42,12 @@ function generateKeySet(file) {
   let originalFileJSON = JSON.parse(rawdata);
   let originalFilePropertySet = new Set();
 
-  iterate(originalFileJSON, "key", originalFilePropertySet);
+  iterate(originalFileJSON, "key", originalFilePropertySet, false);
 
   return originalFilePropertySet;
 }
 
-function generateAntiUnificationList(listOfInputFileSets, propertyType) {
+function generateAntiUnionList(listOfInputFileSets, propertyType) {
   let unionSetLines = [];
 
   listOfInputFileSets.forEach((_, outerIndex) => {
@@ -72,7 +72,7 @@ function generateAntiUnificationList(listOfInputFileSets, propertyType) {
 
 function main(fileList, propertyType) {
   const parsedFileList = parseFiles(fileList);
-  const listOfAntiUnifications = generateAntiUnificationList(
+  const listOfAntiUnifications = generateAntiUnionList(
     parsedFileList,
     propertyType
   );
@@ -80,4 +80,11 @@ function main(fileList, propertyType) {
   return listOfAntiUnifications;
 }
 
-export default main;
+export {
+  parseFiles,
+  generateKeySet,
+  generateValueSet,
+  generateUnionList,
+  generateAntiUnionList,
+  main
+};

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import main from "../src/main.js";
+import { main } from "../src/main.js";
 import program from "commander";
 
 function parseCommaSeparatedList(value, dummyPrevious) {
