@@ -7,5 +7,5 @@ shares certain infrastructure and doesn't have a clear isolation boundry. There'
 # Usage
 
 ```
-node bin/cli.js -f test1.json,test2.json,test3.json -t value
+node bin/cli.js -f test1.json,test2.json,test3.json -i value
 ```
