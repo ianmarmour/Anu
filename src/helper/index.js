@@ -22,9 +22,7 @@ function iterate(obj, propertyType, propertySet) {
     }
   } else {
     for (let property in obj) {
-      if (obj.hasOwnProperty(property)) {
-        propertyProcessor(obj, property, propertyType, propertySet);
-      }
+      propertyProcessor(obj, property, propertyType, propertySet);
     }
   }
 }

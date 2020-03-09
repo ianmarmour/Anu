@@ -70,7 +70,7 @@ function generateAntiUnionList(listOfInputFileSets, propertyType) {
   return unionSetLines.flat();
 }
 
-function main(fileList, propertyType) {
+function main(fileList, propertyType, outputHandler) {
   const parsedFileList = parseFiles(fileList);
   const listOfAntiUnifications = generateAntiUnionList(
     parsedFileList,
