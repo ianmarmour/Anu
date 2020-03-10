@@ -1,11 +1,15 @@
-function iterate(obj, propertyType, propertySet) {
-  const propertyProcessor = (obj, property, propertyType, propertySet) => {
+interface IndexableJSONObject {
+  [k: string]: any;
+}
+
+function iterateObjectRecursively(obj: IndexableJSONObject, propertyType: string, propertySet: Set<string>) {
+  const propertyProcessor = (obj: IndexableJSONObject, property: any, propertyType: string, propertySet: Set<string>) => {
     if (obj.hasOwnProperty(property)) {
       if (typeof obj[property] == "object") {
         if (propertyType === "key" && Array.isArray(obj[property]) === false) {
           propertySet.add(property);
         }
-        iterate(obj[property], propertyType, propertySet);
+        iterateObjectRecursively(obj[property], propertyType, propertySet);
       } else {
         if (propertyType === "key") {
           propertySet.add(property);
@@ -27,4 +31,4 @@ function iterate(obj, propertyType, propertySet) {
   }
 }
 
-export default iterate;
+export default iterateObjectRecursively;

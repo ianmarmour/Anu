@@ -1,12 +1,10 @@
 #!/usr/bin/env node
-import { main } from "../src/main.js";
-import program from "commander";
+const extractAntiUnificationPoints = require('../dist/anti-unify')
+const program = require('commander');
 
-function parseCommaSeparatedList(value, dummyPrevious) {
+function parseCommaSeparatedList(value, previousValue) {
   return value.split(",");
 }
-
-function prepareOutputHandler(value, dummyPrevious) {}
 
 program
   .option(
@@ -43,4 +41,4 @@ if (!program.identifier) {
   );
 }
 
-console.log(main(program.files, program.identifier, program.output));
+console.log(extractAntiUnificationPoints(program.files, program.identifier, program.output));

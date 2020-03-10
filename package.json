@@ -6,6 +6,7 @@
     "anu": "./bin/cli.js"
   },
   "scripts": {
+    "build": "tsc",
     "test": "ava -verbose"
   },
   "ava": {
@@ -14,14 +15,15 @@
     ]
   },
   "author": "",
-  "type": "module",
   "license": "ISC",
   "dependencies": {
     "commander": "^4.1.1",
     "nodejs": "0.0.0"
   },
   "devDependencies": {
+    "@types/node": "^13.9.0",
     "ava": "^3.5.0",
-    "mock-fs": "^4.11.0"
+    "mock-fs": "^4.11.0",
+    "typescript": "^3.8.3"
   }
 }
