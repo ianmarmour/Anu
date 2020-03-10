@@ -1,14 +1,14 @@
 class RefinedJSONFile {
-    private _name: string
+    private _name?: string
     private _keys?: Set<string>
     private _values?: Set<string>
-  
-    constructor(name: string) {
-      this._name = name;
-    }
 
     get name(): string {
-      return this._name;
+      if (this._name) {
+        return this._name
+      } else {
+        return ""
+      }
     }
 
     get keys(): Set<string> {

@@ -10,11 +10,11 @@ function refineJSONFiles(inputFilePaths: Array<string>, JSONSymbols: Array<strin
     const fileDataAsJSON: JSON = JSON.parse(rawFileData.toString());
     const fileName: string = path.basename(inputFilePath);
     const JSONSymbolSetTuples: Array<[string, Set<string>]> = createJSONSymbolSets(fileDataAsJSON, JSONSymbols);
-    
-    let refinedJSONFile = new RefinedJSONFile(fileName);
+    let refinedJSONFile = new RefinedJSONFile();
 
     JSONSymbolSetTuples.forEach(JSONSymbolSet => {
-      refinedJSONFile[JSONSymbolSet[0]](JSONSymbolSet[1])
+      refinedJSONFile.name = fileName
+      refinedJSONFile[JSONSymbolSet[0]] = JSONSymbolSet[1];
     })
 
     return refinedJSONFile;

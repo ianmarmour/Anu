@@ -1,32 +1,21 @@
 #!/usr/bin/env node
-const extractAntiUnificationPoints = require('../dist/anti-unify')
+const extractAntiUnificationPoints = require('../dist/anti-unify').default
 const program = require('commander');
 
-function parseValueOrCoerceToArray(value, previousValue) {
-  let parsedValue = parseCommaSeperatedList(value)
-
-  if(!Array.isArray(parsedValue)) {
-    return [value]
-  }
-
-  return parsedValue
-}
-
-function parseCommaSeparatedList(value, previousValue) {
+function parseCommaSeperatedList(value, previousValue) {
   return value.split(",");
 }
-
 
 program
   .option(
     "-f, --files <files>",
     "Input list of JSON files you want to find the commonality between.",
-    parseCommaSeparatedList
+    parseCommaSeperatedList
   )
   .option(
     "-s, --symbols <JSONSymbol>",
     "The JSON Symbols you want to anti unify with I.E. key, value.",
-    parseValueOrCoerceToArray
+    parseCommaSeperatedList
   )
   .option(
     "-o, --output <outputFilePath>",
