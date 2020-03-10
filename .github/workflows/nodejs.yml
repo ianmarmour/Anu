@@ -1,7 +1,4 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
+name: Build and Release Node.js CI/CD
 
 on:
   push:
@@ -19,24 +16,28 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
     - run: npm ci
     - run: npm install
     - run: npm install -g pkg
     - run: npm run build --if-present
-    - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets win
-    - run: pkg ./dist/bin/cli.js --o ./bin/anu-mac --targets macos
-    - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets linux
+    - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets win # Outputs anu.exe
+    - run: pkg ./dist/bin/cli.js --o ./bin/anu-mac --targets macos # Outputs anu-mac
+    - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets linux # Outputs anu
       env:
         CI: true
-    - name: NodeJS project information
+
+    - name: Read NodeJS Package Information
       id: projectinfo
       uses: gregoranders/nodejs-project-info@v0.0.1
-    - name: Create Release
+
+    - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@latest
       env:
@@ -47,33 +48,36 @@ jobs:
         release_name: ${{ steps.projectinfo.outputs.name }} - ${{ steps.projectinfo.outputs.version }}
         draft: true
         prerelease: false
-    - name: Upload Release Asset Linux
+
+    - name: Upload Release Assets for Linux
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./bin/anu
         asset_name: anu
         asset_content_type: application/octet-stream
-    - name: Upload Release Asset Windows
+
+    - name: Upload Release Assets for Windows
       id: upload-release-asset-2
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./bin/anu.exe
         asset_name: anu.exe
         asset_content_type: application/octet-stream     
-    - name: Upload Release Asset Mac
+
+    - name: Upload Release Assets for MacOSX
       id: upload-release-asset-3
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./bin/anu-mac
         asset_name: anu-mac
         asset_content_type: application/octet-stream     
