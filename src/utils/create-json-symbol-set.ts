@@ -1,5 +1,13 @@
 import iterateObjectRecursively from "./iterate-object-recursively";
 
+function createJSONSymbolSets(fileDataAsJSON: JSON, JSONSymbols: Array<string>): Array<[string, Set<string>]> {
+    let fileJSONSymbolSets: Array<[string, Set<string>]> = JSONSymbols.map(JSONSymbol => {
+        return [JSONSymbol, createJSONSymbolSet(fileDataAsJSON, JSONSymbol)]
+    })
+
+    return fileJSONSymbolSets;
+}
+
 function createJSONSymbolSet(fileDataAsJSON: JSON, JSONSymbol: string): Set<string> {
     let fileJSONSymbolSet: Set<string> = new Set();
   
@@ -8,4 +16,4 @@ function createJSONSymbolSet(fileDataAsJSON: JSON, JSONSymbol: string): Set<stri
     return fileJSONSymbolSet;
 }
 
-export default createJSONSymbolSet;
+export default createJSONSymbolSets;

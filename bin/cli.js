@@ -2,9 +2,20 @@
 const extractAntiUnificationPoints = require('../dist/anti-unify')
 const program = require('commander');
 
+function parseValueOrCoerceToArray(value, previousValue) {
+  let parsedValue = parseCommaSeperatedList(value)
+
+  if(!Array.isArray(parsedValue)) {
+    return [value]
+  }
+
+  return parsedValue
+}
+
 function parseCommaSeparatedList(value, previousValue) {
   return value.split(",");
 }
+
 
 program
   .option(
@@ -13,8 +24,9 @@ program
     parseCommaSeparatedList
   )
   .option(
-    "-i, --identifier <unificationIdentifier>",
-    "The identifier you want to find the commanlity with I.E. key or value"
+    "-s, --symbols <JSONSymbol>",
+    "The JSON Symbols you want to anti unify with I.E. key, value.",
+    parseValueOrCoerceToArray
   )
   .option(
     "-o, --output <outputFilePath>",
@@ -23,22 +35,28 @@ program
 
 program.parse(process.argv);
 
-if (!program.files) {
-  console.log(
-    "Please provide a valid list of files to analyze with -f or --files"
+if (typeof program.files === 'undefined' || program.files === null) {
+  console.error(
+    "error: Please provide a list of 2 or more files to analyze with -f or --files"
   );
+
+  process.exit(1);
 }
 
 if (program.files.length < 2) {
-  console.log(
-    "Please suply a valid list of 2 or more files to compare with -f or --files."
+  console.error(
+    "error: Please suply a list of 2 or more files to compare with -f or --files."
   );
+
+  process.exit(1);
 }
 
-if (!program.identifier) {
-  console.log(
-    "Please provide a valid identifier to analyze your files with -i or --identifier."
+if (!program.symbols) {
+  console.error(
+    "error: Please provide a valid identifier to analyze your files with -s or --symbols."
   );
+
+  process.exit(1);
 }
 
-console.log(extractAntiUnificationPoints(program.files, program.identifier, program.output));
+console.log(extractAntiUnificationPoints(program.files, program.symbols, program.output));
