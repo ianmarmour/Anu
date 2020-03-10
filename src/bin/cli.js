@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const extractAntiUnificationPoints = require('../anti-unify').default
 const program = require('commander');
 
