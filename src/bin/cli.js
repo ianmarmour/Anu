@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const extractAntiUnificationPoints = require('../dist/anti-unify').default
+const extractAntiUnificationPoints = require('../anti-unify').default
 const program = require('commander');
 
 function parseCommaSeperatedList(value, previousValue) {

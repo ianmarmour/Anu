@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "anu": "./bin/cli.js"
+    "anu": "./dist/bin/cli.js"
   },
   "scripts": {
     "build": "tsc",

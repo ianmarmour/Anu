@@ -13,10 +13,10 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "src/bin/**/*"
   ],
   "exclude": [
-    "bin",
     "tst",
     "node_modules"
   ]
