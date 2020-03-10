@@ -33,15 +33,19 @@ jobs:
     - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets win
     - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets macos
     - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets linux
+    - name: nodejs project information
+      id: projectinfo
+      uses: gregoranders/nodejs-project-info
     - name: Create Release
       id: create_release
-      uses: actions/create-release@latest
+      uses: gregoranders/create-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PACKAGE_JSON: ${{ steps.projectinfo.outputs.context }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
+        tag_name: v${{ steps.projectinfo.outputs.version }}
+        release_name: ${{ steps.projectinfo.outputs.name }} - ${{ steps.projectinfo.outputs.version }}
+        draft: true
         prerelease: false
     - name: Upload Release Asset
       id: upload-release-asset 
