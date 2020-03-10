@@ -35,7 +35,7 @@ jobs:
     - run: pkg ./dist/bin/cli.js --o ./bin/anu --targets linux
     - name: nodejs project information
       id: projectinfo
-      uses: gregoranders/nodejs-project-info@latest
+      uses: gregoranders/nodejs-project-info@v0.0.1
     - name: Create Release
       id: create_release
       uses: actions/create-release@latest
