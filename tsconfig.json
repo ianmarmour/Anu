@@ -14,10 +14,10 @@
   },
   "include": [
     "src/**/*",
-    "src/bin/**/*"
+    "src/bin/**/*",
+    "src/tst/**/*"
   ],
   "exclude": [
-    "tst",
     "node_modules"
   ]
 }

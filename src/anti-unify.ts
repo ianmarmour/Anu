@@ -66,4 +66,7 @@ function extractAntiUnificationPoints(inputFilePathList: Array<string>, JSONSymb
   return anitUnificationPointsCSV;
 }
 
-export default extractAntiUnificationPoints
+export {
+  refineJSONFiles,
+  extractAntiUnificationPoints
+}

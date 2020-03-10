@@ -1,4 +1,4 @@
-import extractAntiUnificationPoints from "../anti-unify";
+import { extractAntiUnificationPoints } from "../anti-unify";
 import program from 'commander';
 
 function parseCommaSeperatedList(value: string, previousValue: string) {

@@ -6,9 +6,10 @@ function iterateObjectRecursively(obj: IndexableJSONObject, propertyType: string
   const propertyProcessor = (obj: IndexableJSONObject, property: any, propertyType: string, propertySet: Set<string>) => {
     if (obj.hasOwnProperty(property)) {
       if (typeof obj[property] == "object") {
-        if (propertyType === "key" && Array.isArray(obj[property]) === false) {
+        if (propertyType === "key") {
           propertySet.add(property);
         }
+
         iterateObjectRecursively(obj[property], propertyType, propertySet);
       } else {
         if (propertyType === "key") {
@@ -22,6 +23,10 @@ function iterateObjectRecursively(obj: IndexableJSONObject, propertyType: string
 
   if (Array.isArray(obj)) {
     for (let property of obj) {
+      if(typeof property === "object") {
+        iterateObjectRecursively(property, propertyType, propertySet);
+      }
+
       propertyProcessor(obj, property, propertyType, propertySet);
     }
   } else {
