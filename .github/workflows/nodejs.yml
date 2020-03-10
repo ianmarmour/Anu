@@ -28,6 +28,10 @@ jobs:
     - run: npm install
     - run: npm install -g pkg
     - run: npm run build --if-present
-    - run: pkg ./dist/bin/cli.js
+    - run: pkg ./dist/bin/cli.js --out-path ./bin/
+    - uses: actions/upload-artifact@v1.0.0
+      with:
+        name: Anu-Release
+        path: ./bin/
       env:
         CI: true
