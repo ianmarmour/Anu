@@ -1,7 +1,7 @@
-const extractAntiUnificationPoints = require('../anti-unify').default
-const program = require('commander');
+import extractAntiUnificationPoints from "../anti-unify";
+import program from 'commander';
 
-function parseCommaSeperatedList(value, previousValue) {
+function parseCommaSeperatedList(value: string, previousValue: string) {
   return value.split(",");
 }
 
@@ -47,4 +47,4 @@ if (!program.symbols) {
   process.exit(1);
 }
 
-console.log(extractAntiUnificationPoints(program.files, program.symbols, program.output));
+console.log(extractAntiUnificationPoints(program.files, program.symbols));
