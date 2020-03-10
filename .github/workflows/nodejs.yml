@@ -28,6 +28,6 @@ jobs:
     - run: npm install
     - run: npm install -g pkg
     - run: npm run build --if-present
-    - run: pkg .\dist\bin\cli.js
+    - run: pkg ./dist/bin/cli.js
       env:
         CI: true
