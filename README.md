@@ -6,8 +6,19 @@ shares certain infrastructure and doesn't have a clear isolation boundry. There'
 
 # Usage
 
+Windows
 ```
+npm run install
+npm run build
 node .\dist\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value,key
 node .\dist\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value
 node .\dist\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s key
+```
+Linux/Mac
+```
+npm run install
+npm run build
+node ./dist/bin/cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value,key
+node ./dist/bin/cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value
+node ./dist/bin/cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s key
 ```
