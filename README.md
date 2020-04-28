@@ -7,7 +7,7 @@ shares certain infrastructure and doesn't have a clear isolation boundry. There'
 # Usage
 
 ```
-node .\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value,key
-node .\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value
-node .\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s key
+node .\node\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value,key
+node .\node\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s value
+node .\node\bin\cli.js --files ./data/json1.json,./data/json2.json,./data/json3.json -s key
 ```
